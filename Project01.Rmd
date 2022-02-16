@@ -1,5 +1,5 @@
 ---
-title: "Group Project 1"
+title: "Group Project 4"
 subtitle: "Biology 368/664 Bucknell University"
 output: html_notebook
 author: Prof. Ken Field
@@ -53,8 +53,14 @@ Each group should use an *Acknowledgements* section to document the participatio
 
 Additional credit will be awarded for providing assistance to other groups and for the development of a tutorial that goes beyond the minimal expectations listed above.
 
-## Sample Dataset
+#Data exploration 
 
+#Data visulization 
+
+#Hypothesis Testing 
+
+
+## Sample Dataset
 One of the possible datasets to use for the tutorial can be found in the datasauRus package.
 
 ```{r}
