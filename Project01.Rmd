@@ -159,11 +159,40 @@ When you explore the data enough you can move onto truly visualizing it.
 #Data visulization 
 
 #Hypothesis Testing 
+Now that we have looked and explored the data above, you are going to want to check to see if the data is normal. To do this, we will be using a Shapiro-Wilk normality test. First you are going to want to create different plots of the data to look at it individually. The normal Q-Q plot should look linear.  Then we will create the Shapiro test and once you have used this command, you will look at the p-value output. If the p-value is above 0.05 it is normal, and if it is below 0.05 then the data is not normal. 
 
-```{r
+```{r Data Exploration}
+#Testing body weight
+simple.eda(msleep$bodywt)
+shapiro.test(msleep$bodywt)
+```
+In this Shapiro-Wilk example, the data is not normal since the p-value of 2.2e-16 is below the 0.05 cutoff. Also, the graph of the Q-Qplot is not linear showing another example that the data is not normal. 
+
+To fix this, you can try to use a log on the data to try to make this more linear. To do this you can create a new vector associated with log of the body weight. Then use the new vector in the same tests as you ran above. 
+
+```{r Fixing Data Exploration}
+logbodywt <- log(msleep$bodywt)
+simple.eda(logbodywt)
+shapiro.test(logbodywt)
+```
+As you can see, the log transformation was able to make the data more normal. The Q-Q plot shows a more linear graph than it did previously. Also, the p-value with the log transformation is now 0.1048 which is above the 0.05 cutoff, meaning that the data is normal. 
+
+An important note to remember going forward is that you should continue to you the vector "logbodywt" because this uses the transformed data that is now normal rather than old data that was not normal. 
+
+Now, you are going to test your data with a t-test, which is used to statistically tell if there is a difference in means between two different groups. If you have taken a statistics class, you have likely learned about how to do a t-test, but this will do it manually for you. 
+
+```{r}
 Carnivore <- dplyr::filter(msleep, vore =="carni")
 Herbivore <- dplyr::filter(msleep, vore =="herbi")
 ```
+
+
+```{r t-test}
+Carni <- logbodywt[msleep$vore == "carni"]
+Herbi <- logbodywt[msleep$vore == "herbi"]
+t.test(Carni, Herbi)
+```
+
 
 
 # Acknowledgements
