@@ -6,13 +6,7 @@ author:
 date: 9 Feb 2022
 ---
 
-```{r Load Libraries, include=FALSE}
-# Load other packages here.
-if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
-```
-
 ## Target Audience
-
 Discuss with your group the target audience for the tutorial. 
 Examples could be one of the new core Biology classes, another 300-level course (not 364), or a research group. 
 
@@ -41,11 +35,56 @@ Additional credit will be awarded for providing assistance to other groups and f
 
 #Introducing R
 
+*What is R?* 
+R is a programming language that is used to manipulate, visualize, and interpret data. 
+R is specifically designed to manipulate large data set and to visualize those data sets in a way that can be used to gather conclusions. It is free to download, making it very accessible to anyone who wants to use it. Currently, R is the industry standard for data science in biology. 
+
+*Introduction to R Studio *
+The display screen of R Studio is split into 4 different quadrants, each of which has a different purpose. 
+
+R Script: the upper left window. This is where you will spend the most time in R as it's where you will write your code. 
+
+R Consule: the bottom left window. This is where the program R is actually running. You are also able to write code directly in the console, but there is no way to edit the code you put there after you run it. Generally it's best to write any code in the script so then you have the ability to change it later. 
+The console is also where error messages appear. These messages will be usable, in conjunction with other sources as such as Google, in determining the mistakes you made in your code. 
+
+R Environment: the upper right window. This shows a record of all of the objects you currently have saved in R. So any variables, data frames, or variables you have will be shown here. 
+
+R graphical output/files/packages: the bottom right screen. This window has many different functions. Here, you can navigate through your computer and locate files to load into R. The plots tab also allows you to look at any graphs you created. Lastly, the package tab is one way you'll be able to load different packages into R.
+
+*Writing commands in R* 
+Writing code is how you'll get anything done in R, so it's best to learn how to do so first. 
+
+The section above said that you write code in the R script window, but the text you're currently reading isn't code. So, in a
+
+*Packages in R*
+You can use R just by writing code into the console; however, it is much more useful to use packages. Packages are collections of code, functions, and data sets that make R easier to use. 
+
+Loading in packages 
+There are many ways to load packages, but the annoying thing is that a packages must be both installed in computer and then loaded onto your specific document. Even if you already installed a package, you will have to load the same package for every new R markdown you create. 
+
+First is just by using the package tab in the bottom right screen. 
+
+The second method is by writing code that specifically loads the package. This method is preferred; if you were to share your code with anyone, they would be able to use the same packages you installed because you added code to do that. 
+
+Let's do any example of loading in some packages right now. 
+
+Here, we're loading the package "cowplot", which is used to create neater, more uniform looking graphs. 
+```{r Load Libraries, include=FALSE}
+if (!require("cowplot")) install.packages("cowplot"); library(tidyverse)
+```
+This code looks complicated, but let's break it down. 
+`if (!require("cowplot")) install.packages("cowplot")` tells R to see see if "cowplot" is already installed in your computer. If it's not installed, then it tells R to do so. 
+Next, `library(cowplot)` tells R to load cowplot on your current work space. 
+
+To load different packages, change the word "cowplot" in the code above 
+
+
 #Data exploration 
 
 #Data visulization 
 
 #Hypothesis Testing 
+
 
 # Acknowledgements
 
