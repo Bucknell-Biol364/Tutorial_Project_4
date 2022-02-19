@@ -85,30 +85,30 @@ To load different packages, change the word "cowplot" in the code above
 #Data exploration 
 The first thing to do when exploring data is to look at the whole datasheet. This can be done with the summary command. 
 
-*summary() allows you to look at the summary of the data*
-```{r}
+*summary(dataset) allows you to look at the summary of the data*
+```{r summary}
 summary(msleep)
 ```
 
 You can also view the data in table form to see if it imported correctly 
 
 *Just type the name of the data set*
-```{r}
+```{r summary 2}
 msleep
 ```
 
 Now that the whole data set has been seen you can now begin to look at different variables.  
 
 *table(dataset$variable)*
-```{r}
+```{r one variable}
 table(msleep$vore)
 ```
 
 or you could view tables with 2 variables against each other 
 
 *table(dataset$varible1, dataset$variable2)*
-```{r}
-table(msleep$order, msleep$vore)
+```{r 2 variables}
+
 ```
 
 A hypothesis to test for this data is, total sleep depends on body weight. 
@@ -116,11 +116,8 @@ A hypothesis to test for this data is, total sleep depends on body weight.
 For the hypothesis we are looking at body weight so we can look at a box plot of the data. Type the command below.
 
 *ggplot(msleep) + aes(x = bodywt) + geom_histogram() + theme_cowplot()*
-```{r}
-ggplot(msleep) +
-  aes(x = bodywt) +
-  geom_histogram() +
-  theme_cowplot()
+```{r normality}
+
 ```
 
 From this box plot we can see the normality of the data. It is important that the data be distributed normally because for statistical tests you will see later many assume the data is normal.
@@ -130,11 +127,8 @@ We can see here that the data is not distrusted normally, so we can try and tran
 Try making a histogram of body weight but this time try doing a log transformation. 
 
 *Type the same command as before but this time for x type log(bodywt)*
-```{r}
-ggplot(msleep) +
-  aes(x = log(bodywt)) +
-  geom_histogram() +
-  theme_cowplot()
+```{r log transform}
+
 ```
 
 The data was made more normal from a log10 transformation. Sometimes the data cannot be transformed to become normal and that is okay. Just make a note when doing a statistical test that the data was not distributed normally.
@@ -143,13 +137,8 @@ If you had a more specific hypothesis and wanted to look at a more specific rang
 
 *new name <- filter(msleep, (bodywt <= 100))*
 *ggplot(new name) + aes(x = log(brainwt)) + geom_histogram() + theme_cowplot()*
-```{r}
-bodywt.large <- filter(msleep, (bodywt <= 100))
+```{r filter}
 
-ggplot(bodywt.large) +
-  aes(x = log(brainwt)) +
-  geom_histogram() +
-  theme_cowplot()
 ```
 
 If you needed, you could do multiple data filters for different variable at the same time. Just make sure to give the filtered data good name. Sometimes you can end up with a lot of different names, so stay organized. Also you never want to name something the same as the name of the data set because R will overwrite the data with your filtered data. 
