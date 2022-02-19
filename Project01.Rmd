@@ -2,17 +2,11 @@
 title: "Group Project 4"
 subtitle: "Biology 368/664 Bucknell University"
 output: html_notebook
-author: 
+author: "Abby, Irene, and Sam"
 date: 9 Feb 2022
 ---
 
-```{r Load Libraries, include=FALSE}
-# Load other packages here.
-if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
-```
-
 ## Target Audience
-
 Discuss with your group the target audience for the tutorial. 
 Examples could be one of the new core Biology classes, another 300-level course (not 364), or a research group. 
 
@@ -84,6 +78,10 @@ Next, `library(cowplot)` tells R to load cowplot on your current work space.
 
 To load different packages, change the word "cowplot" in the code above 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> f5c095062c264f4095a26a7037d71eab7f6aa994
 #Data exploration 
 The first thing to do when exploring data is to look at the whole datasheet. This can be done with the summary command. 
 
@@ -161,6 +159,7 @@ When you explore the data enough you can move onto truly visualizing it.
 #Data visulization 
 
 #Hypothesis Testing 
+
 
 # Acknowledgements
 
