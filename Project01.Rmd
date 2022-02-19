@@ -12,8 +12,6 @@ if (!require("datasauRus")) install.packages("datasauRus"); library(datasauRus)
 if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
 ```
 
-This project will require you to develop a tutorial to teach Bucknell students how to use R for graphing and data analysis. 
-
 ## Target Audience
 
 Discuss with your group the target audience for the tutorial. 
@@ -23,17 +21,6 @@ Examples could be one of the new core Biology classes, another 300-level course 
 
 ```
 
-## Groups
-
-You will work with the same groups as for the Homework 2 Peer review. 
-
-```{r}
-PeerGroups1 <- read_csv("../00-Syllabus/PeerGroups1.csv")
-PeerGroups1 %>% 
-  select(-MAJR, -CLAS, ) %>%
-  print()
-```
-
 ## Grading
 
 Each student will be expected to complete the following tasks to earn 85% of the points available for this assignment (21/25).
@@ -41,9 +28,9 @@ Each student will be expected to complete the following tasks to earn 85% of the
 - Identify and obtain suitable dataset
 - Use a Github repository and version control to collaborate on the project
 - Spend 4-6 hours preparing, coding, and testing tutorial
-  + Data exploration
-  + Data visualization
-  + Hypothesis testing
+  + Data exploration: Sam
+  + Data visualization: Irene
+  + Hypothesis testing: Abby 
 - Present tutorial in class
 - Provide public archive suitable for sharing to students/faculty
 
@@ -52,6 +39,8 @@ Tutorials from previous classes can be viewed at our public github site: https:/
 Each group should use an *Acknowledgements* section to document the participation of each member and the collaboration within and between groups.
 
 Additional credit will be awarded for providing assistance to other groups and for the development of a tutorial that goes beyond the minimal expectations listed above.
+
+#Introducing R
 
 #Data exploration 
 
@@ -129,3 +118,9 @@ He's been subsequently made even more famous in the paper [Same Stats, Different
 In the paper, Justin and George simulate a variety of datasets that the same summary statistics to the Datasaurus but have very different distributions. 
 
 This package also makes these datasets available for use as an advanced [Anscombe's Quartet](https://en.wikipedia.org/wiki/Anscombe%27s_quartet), available in R as `anscombe`.
+
+
+Team Members: 
+Irene Hu 
+
+
