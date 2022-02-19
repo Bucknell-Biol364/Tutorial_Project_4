@@ -191,7 +191,6 @@ After running the t-test independent sample, the p number is 0.06855 which is la
 
 Team Members: 
 Sam Whittaker- Data Exploration Section 
-
 Abby Gearhart - Hypothesis testing
 
 
