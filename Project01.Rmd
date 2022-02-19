@@ -160,9 +160,9 @@ When you explore the data enough you can move onto truly visualizing it.
 
 #Hypothesis Testing 
 
-```{r}
-sleepCarnivore <- dplyr::filter(msleep, vore =="carni")
-sleepHerbivore <- dplyr::filter(msleep, vore =="herbi")
+```{r
+Carnivore <- dplyr::filter(msleep, vore =="carni")
+Herbivore <- dplyr::filter(msleep, vore =="herbi")
 ```
 
 
