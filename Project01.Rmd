@@ -102,7 +102,7 @@ Sometimes the mode that R picks for the data needs to be changed.
 
 ```
 
-For this specific variable it would be usefulness to change the mode but sometimes you will run into situations where it is necessary, so always check the class and mode of your variables. 
+For this specific variable it would be useless to change the mode but sometimes you will run into situations where it is necessary, so always check the class and mode of your variables. 
 
 Now that the whole data set has been seen you can now begin to look at different variables.  
 
@@ -148,9 +148,9 @@ If you had a more specific hypothesis and wanted to look at a more specific rang
 
 ```
 
-If you needed, you could do multiple data filters for different variable at the same time. Just make sure to give the filtered data good name. Sometimes you can end up with a lot of different names, so stay organized. Also you never want to name something the same as the name of the data set because R will overwrite the data with your filtered data. 
+If you needed, you could do multiple data filters for different variable at the same time. Just make sure to give the filtered data a good name. Sometimes you can end up with a lot of different names, so stay organized. Also you never want to name something the same as the name of the data set because R will overwrite the data with your filtered data. 
 
-When you explore the data enough you can move onto truly visualizing it. 
+When you explore the data enough you can then move onto truly visualizing it. 
 
 #Data visulization 
 
