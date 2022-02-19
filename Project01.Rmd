@@ -54,10 +54,33 @@ R graphical output/files/packages: the bottom right screen. This window has many
 *Writing commands in R* 
 Writing code is how you'll get anything done in R, so it's best to learn how to do so first. 
 
-The section above said that you write code in the R script window, but the text you're currently reading isn't code. So, in a
+The section above said that you write code in the R script window, but the text you're currently reading isn't code. We are currently using a R Markdown file, where the default text is not considered code. 
+
+To write a line of code that R will try to run, you must use a code chunk. Anything that isn't within a code chunk will just be considered text and ignored by R, but R will try to run anything that is within a code chunk. 
+
+Creating Code Chunks 
+There are many wasy to create a code chunk. 
+
+1) Use the create code chunk button on the top of the screen (a green C with a plus sign). This will automatically add a chunk wherever your mouse is currently in the script. When you use this, chose the default R option. 
+
+2) creating one manually. You can type in the symbols that indicate a code chunk by yourself. The start of a chunk is is designated by three backticks (```) followed by a set of curly brackes ({}). On the next time, add three additional bacticks to designate the end of a code chunk. The code you want to run should go in between. 
+```{r a code chunk}
+
+```
+You may also name your code chunks something more specific by adding more wording following the r in the curly brackets. But be warned, if you are going to name your code chunks, know that each code chunk must have a unique name or else R may run into problems.
+
+Adding Comments 
+What if you want to add a line of text code within a code chunk that isn't code? You can add comments by prefacing them with a # symbol. This tells R that the text following # is not meant to be run. 
+
+Run the code below and see what output is given.
+```{r Hello World}
+print("Hello World")
+#this code will return the phrase "Hello World" bock to you. 
+```
+Notice how the print command was the only thing that run in that code chunk. The words following # are ignored. 
 
 *Packages in R*
-You can use R just by writing code into the console; however, it is much more useful to use packages. Packages are collections of code, functions, and data sets that make R easier to use. 
+You can use R just by writing code into the console, which will work just fine; however, it is much more useful to use packages. Packages are collections of code, functions, and data sets that make R easier to use. 
 
 Loading in packages 
 There are many ways to load packages, but the annoying thing is that a packages must be both installed in computer and then loaded onto your specific document. Even if you already installed a package, you will have to load the same package for every new R markdown you create. 
@@ -70,13 +93,30 @@ Let's do any example of loading in some packages right now.
 
 Here, we're loading the package "cowplot", which is used to create neater, more uniform looking graphs. 
 ```{r Load Libraries, include=FALSE}
-if (!require("cowplot")) install.packages("cowplot"); library(tidyverse)
+if (!require("cowplot")) install.packages("cowplot"); library(cowplot)
 ```
 This code looks complicated, but let's break it down. 
 `if (!require("cowplot")) install.packages("cowplot")` tells R to see see if "cowplot" is already installed in your computer. If it's not installed, then it tells R to do so. 
 Next, `library(cowplot)` tells R to load cowplot on your current work space. 
 
-To load different packages, change the word "cowplot" in the code above 
+
+
+To load different packages, type in the name of you package you want to use.
+So, here, we're loading in the package "tidyverse", which contains a whole host of useful packages used to help manipulate and visualize data 
+```{r Load Libraries, include=FALSE}
+if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
+```
+Notice how you only have to replace the name of the package. So here, the word tidyverse replaced every instance of the the word cowplot. Keep the format the same - keep the quotation marks where they already are but keep them off where they aren't needed. 
+
+Try loading in the package "ggplot2", which is used to help make graphs 
+```{r}
+```
+
+In this tutorial, we're going to be looking at 
+
+
+This is an updated and expanded version of the mammals sleep dataset. Updated sleep times and weights were taken from V. M. Savage and G. B. West. A quantitative, theoretical framework for understanding mammalian sleep. Proceedings of the National Academy of Sciences, 104 (3):1051-1056, 2007.
+http://www.pnas.org/content/104/3/1051.abstract
 
 #Data exploration 
 
