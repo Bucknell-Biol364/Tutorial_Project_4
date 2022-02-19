@@ -78,10 +78,6 @@ Next, `library(cowplot)` tells R to load cowplot on your current work space.
 
 To load different packages, change the word "cowplot" in the code above 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> f5c095062c264f4095a26a7037d71eab7f6aa994
 #Data exploration 
 
 You can view the data in table form to see if it imported correctly 
