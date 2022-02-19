@@ -169,7 +169,7 @@ Herbivore <- dplyr::filter(msleep, vore =="herbi")
 # Acknowledgements
 
 Team Members: 
-
+Sam Whittaker- Data Exploration Section 
 
 
 
