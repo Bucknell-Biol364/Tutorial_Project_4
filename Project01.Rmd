@@ -191,8 +191,180 @@ If you had a more specific hypothesis and wanted to look at a more specific rang
 If you needed, you could do multiple data filters for different variable at the same time. Just make sure to give the filtered data a good name. Sometimes you can end up with a lot of different names, so stay organized. Also you never want to name something the same as the name of the data set because R will overwrite the data with your filtered data. 
 
 When you explore the data enough you can then move onto truly visualizing it. 
+ 
 
 #Data visulization 
+
+Though you've already seen some graphs displayed, here we'll show you how to create graphs in some more depth. Specifically, we will use the package ggplot2 to do so.
+We'll at the distribution of some of the key variables we're looking at, such as body weight and and sleep total. 
+
+*One variable graphs*
+*
+Let's first start with the histogram you already saw in the previous section exploring the distribution of body weight. 
+```{r histogram for body weight}
+ggplot(msleep) +
+  aes(x=bodywt)+
+  geom_histogram()
+```
+Let's break this down a bit.
+The function ggplot is very diverse and can be used to create many,many plots, but it has some specific parameters that you must use for it to work. The above code shows the bare minimum you need to use ggplot. Many more additional parameters can be called to change the graph. 
+
+(Note that there are many different format you can use to utilize ggplot, and this tutorial will only show you one method)
+
+*Basic Elements of ggplot:*
+1) ggplot(), this calls the function ggplot. Within the parenthesis is where you should call the dataframe you are using. This tells R to use that dataframe when creating the graph. 
+
+2) aes(), this controls the "aesthetics" of the graph, or which variables in the data should be used where. So here, you would tell R which x and y variable you're using ( and possibly which variable you cant to group by if that's your analysis). In the example above, only the x variable is specified as the variable bodywt. The y variable is left unspecified in this case, which means R will use count ( or the total number of individual) as the y variable. 
+(Note that you don't need to use parenthesis here, "bodywt", since you already specified msleep as the dataframe. So R will look within the dataframe msleep for a variable called bodywt.)
+
+3) geom_historgram(), this tell R which specific graph you want to create. Because we're looking at a distribution of only one variable, we're using a histogram. You can, however, use serval other graphs - geom_boxplot, geom_point (for a scatterplot), and more. 
+(A list of some of the different plots you can make are listed here: https://ggplot2.tidyverse.org/reference/)
+
+
+But we can add some additonal features/change some features of our graph. 
+Let's redo this same histogram, but this time 1) clean up the histogram, 2) clean it up the background, and 3)change the axes labels. 
+```{r improved histogram for body weight}
+ggplot(msleep) +
+  aes(x=bodywt)+
+  geom_histogram(bins=50, color="black",fill="grey")+
+  labs(x="Body Mass (kg)",y="Number of Individuals")+
+  theme_cowplot()
+```
+1) Cleaning up the graph: 
+Here, three things were changed: the outline of the bars, the color of the bars, and the size of each bar. 
+- `bins=50` changed the size of each bar. To be more technical, this code changed the number of bins used. A bin is a a group of data. The default is bin=30, but by changing that to a large number we are able to see a bit of the graph as a whole. You will not always have to change the bin number, but the previous graph gave a suggestion to change the bin number. 
+- `color="black"` changed the outline of the histogram to the color black. You can specify the name of basic colors within quotations. 
+- `fill="grey"`, this changed the color the histogram.
+
+2) Cleaning up the Background 
+The grey and white grid mas removed and axis lines were added. This is all courtesy of the command `theme_cowplot()` which applies all these changes in one command. 
+
+3) Changing the Axes Names 
+A new section `labs()` was added. This stands for labels, and you can change the label names of anything you specify. So to change the x axis label, you would use `x="New Name"`. The same logic would apply to the y axis label. Here, you will need to specificy the name is quotation marks. 
+
+So the general format for 
+`ggplot(Dataframe) + aes(x=xvariable,y=yvariable)+ geom_histogram(bins=#, color="color",fill="color") + labs(x="X Label",y="Y Label")+ theme_cowplot()` 
+
+You can also look at the log transformed data of body weight, since we know that body weight is not noramlly distributed
+```{r improved histogram for body weight}
+ggplot(msleep) +
+  aes(x=log(bodywt))+
+  geom_histogram(bins=40, color="black",fill="grey")+
+  labs(x="Log Body Mass (kg)",y="Number of Individuals")+
+  theme_cowplot()
+```
+
+Create a histogram for the variable brainwt The base code is provided, but you'll have to add the specifics. Keep in mind that you may also have to transform the variable. 
+```{r your graph for histogram for brainwt}
+ggplot() +
+  aes()+
+  geom_histogram()
+```
+*Histograms of Categorical Variables*
+You can also use histograms for categorical variables, such as the variable vore (which states which "vore" an animal is).
+
+The code for this is very similiar as for quantitative variables, but there are some key changes.
+```{r transformed histogram for body weight}
+ggplot(msleep) +
+  aes(x=vore)+
+  geom_bar (color="black",fill="grey")+
+  labs(x="Type of Feeder",y="Number of Individuals")+
+  scale_x_discrete(labels = c('Carnivore','Herbivore','Insectivore',"Omnivore","NA"))+
+  theme_cowplot()
+```
+The most important change to note the change of geom_histogram to geom_bar.
+Histograms are used to show continuous, quantitative data wheres bar graphs are used to show the counts ( which is perfect for categorical variables.)
+
+An explanation to change the factors names on the graph: 
+`scale_x_discrete(labels = c('Carnivore','Herbivore','Insectivore',"Omnivore","NA"))` was used to change the names. The `c()` is the concatenate function, which is used to combine a list of things. 
+You must list out the new names you want in the order that you want it in. R will take that list of names and replace it exactly as you have it listed. So the list name will go to the first graph bar in the graph, the second name to the third name, and so on and so forth. Make sure that you the number of names you have matches the number of things you want to change. 
+
+*Looking at more than one variable*
+
+*Quantitative vs quantitative variable*
+To look at the distribution of two quantitative variables, use a scatter plot.
+```{r boxplot of vore and sleep_total}
+ggplot(msleep) +
+  aes(x=log(bodywt),y=sleep_total)+
+  geom_smooth()+
+  geom_point()+
+  labs(x="Log Body Mass (kg)",y="Total Sleep (hrs)")+
+  theme_cowplot()
+```
+To use a scatterplot, use `geom_point`, which plots points on the graph. The additonal code `geom_smooth` will add a regression line on the point as well as a 95% confidence interval. 
+
+*Categorical vs. quantitative variable* 
+To look at the distribution of a quantitative variable for the different levels of a categorical variables, use a box plot. 
+```{r boxplot of vore and sleep_total}
+ggplot(msleep) +
+  aes(x=vore,y=sleep_total)+
+  geom_boxplot()+
+  labs(x="Type of Feeder",y="Total Sleep (hrs)")+
+  scale_x_discrete(labels = c('Carnivore','Herbivore','Insectivore',"Omnivore","NA"))+
+  theme_cowplot()
+```
+The basic commands for ggplot remain largely unchanged, expect now you have to call `geom_boxplot` instead of `geom_histogram`. 
+Also, because you are looking at more than one variable, you must specify a x and y variable. 
+
+*Filtering using Dplyr to Isolate Variable* 
+But what if you only want to look at a couple of factors within a categorical variables. Like for example, you want to look at whether the body mass of carnivores differs significantly from that of herbivores. 
+
+One way to do this is create a create a new data frame which only those factor you want to look at. To do this, we can use the dplyr package (which is included in the tidyverse package) and specifically the filter function. 
+
+First, we'll start with some practice isolating factors.
+
+```{r isolating factors}
+dplyr::filter(msleep, vore =="carni" )
+```
+Here we use the filter command in dplyr to isolate only the animals that are carnivores. We bust specify the data frame we're looking at as well as the logical argument.
+
+Here are some common logical statments
+      Symbol          Meaning 
+        <             is less than 
+        <==           is less than or equal to
+        >             is greater than 
+        >==           is greater than or equal to
+        ==            is equal to 
+        !=            is not equal to
+        |             or 
+        &             and
+
+Try isolating only the herbivores.
+```{r isolating herbivores}
+```
+
+
+But how does this help us create a boxplot of only the herbivores and the carnivores?
+
+Let's create a new dataframe with only those animals. 
+```{r creating a new dataframe for carnivore and herbivores}
+CarniHerbi <- dplyr::filter(msleep, vore =="carni" | vore =="herbi")
+```
+
+There's a lot to break down here. 
+Firstly, we are creating a new data frame called CarniHeri. This is specificed by the arrow sign, which points to the the name of the new data frame but starts at what that that dataframe will contain. 
+
+To create this new dataframe, R will use the dataframe msleep.
+In this dataframe CarniHerbi, there only contain animals who are carnivore or herbivores. The `|` is a logical statement which means "or". 
+
+
+Now let us create a boxplot of the body mass of only carnivores and herbivores.
+```{r boxplot of select vore and body mass}
+ggplot(CarniHerbi) +
+  aes(x=vore,y=log(bodywt))+
+  geom_boxplot()+
+  labs(x="Type of Feeder",y="Body Mass (kg)")+
+    scale_x_discrete(labels = c('Carnivore','Herbivore'))+
+  theme_cowplot()
+```
+
+Let's have you try creating a boxplot of the total sleep of only insectivores and omnivores. 
+
+```{r creating a new dataframe for omnivores and insectivores}
+```
+
+```{r your boxplot of select vore and body mass}
+```
 
 #Hypothesis Testing 
 Now that we have looked and explored the data above, you are going to want to check to see if the data is normal. To do this, we will be using a Shapiro-Wilk normality test. First you are going to want to create different plots of the data to look at it individually. The normal Q-Q plot should look linear.  Then we will create the Shapiro test and once you have used this command, you will look at the p-value output. If the p-value is above 0.05 it is normal, and if it is below 0.05 then the data is not normal. 
