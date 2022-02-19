@@ -101,9 +101,23 @@ msleep
 
 Now that the whole data set has been seen you can now begin to look at different variables.  
 
+*table(dataset$variable)*
+```{r}
+table(msleep$vore)
+```
+
+or you could view tables with 2 variables against each other 
+
+*table(dataset$varible1, dataset$variable2)*
+```{r}
+table(msleep$order, msleep$vore)
+```
+
+A hypothesis to test for this data is, total sleep depends on body weight. 
+
 For the hypothesis we are looking at body weight so we can look at a box plot of the data. Type the command below.
 
-*ggplot(msleep) + aes(x = ) + geom_histogram() + theme_cowplot()*
+*ggplot(msleep) + aes(x = bodywt) + geom_histogram() + theme_cowplot()*
 ```{r}
 ggplot(msleep) +
   aes(x = bodywt) +
