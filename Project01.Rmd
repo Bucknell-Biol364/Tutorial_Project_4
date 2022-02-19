@@ -87,21 +87,21 @@ The first thing to do when exploring data is to look at the whole datasheet. Thi
 
 *summary(dataset) allows you to look at the summary of the data*
 ```{r summary}
-summary(msleep)
+
 ```
 
 You can also view the data in table form to see if it imported correctly 
 
 *Just type the name of the data set*
 ```{r summary 2}
-msleep
+
 ```
 
 Now that the whole data set has been seen you can now begin to look at different variables.  
 
 *table(dataset$variable)*
 ```{r one variable}
-table(msleep$vore)
+
 ```
 
 or you could view tables with 2 variables against each other 
