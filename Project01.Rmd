@@ -83,19 +83,30 @@ To load different packages, change the word "cowplot" in the code above
 =======
 >>>>>>> f5c095062c264f4095a26a7037d71eab7f6aa994
 #Data exploration 
-The first thing to do when exploring data is to look at the whole datasheet. This can be done with the summary command. 
 
-*summary(dataset) allows you to look at the summary of the data*
-```{r summary}
-
-```
-
-You can also view the data in table form to see if it imported correctly 
-
+You can view the data in table form to see if it imported correctly 
 *Just type the name of the data set*
 ```{r summary 2}
 
 ```
+Then you can look at the summary of the whole datasheet. This can be done with the summary command. 
+
+*summary(dataset) allows you to look at the summary of the data*
+```{r summary}
+summary(msleep)
+```
+
+The summary command is very powerful in that it provides the basics of the data. It tells you what each variable type (mode) is labled as (character, numeric, integer, complex, or logical). It also provides you with each variables name, number of data points, mean, median, min, max, 1st quartile, and 3rd quartile. 
+
+Sometimes the mode that R picks for the data needs to be changed. 
+
+*new name <- as.character(dataset$variable)* 
+*You can check it worked with mode(new name)*
+```{r}
+
+```
+
+For this specific variable it would be usefulness to change the mode but sometimes you will run into situations where it is necessary, so always check the class and mode of your variables. 
 
 Now that the whole data set has been seen you can now begin to look at different variables.  
 
