@@ -8,7 +8,6 @@ date: 9 Feb 2022
 
 ```{r Load Libraries, include=FALSE}
 # Load other packages here.
-if (!require("datasauRus")) install.packages("datasauRus"); library(datasauRus)
 if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
 ```
 
@@ -43,6 +42,64 @@ Additional credit will be awarded for providing assistance to other groups and f
 #Introducing R
 
 #Data exploration 
+The first thing to do when exploring data is to look at the whole datasheet. This can be done with the summary command. 
+
+*summary() allows you to look at the summary of the data*
+```{r}
+summary(msleep)
+```
+
+You can also view the data in table form to see if it imported correctly 
+
+*Just type the name of the data set*
+```{r}
+msleep
+```
+
+Now that the whole data set has been seen you can now begin to look at different variables.  
+
+For the hypothesis we are looking at ____ so we can look at a box plot of the data. Type the command below.
+
+*ggplot(msleep) + aes(x = ) + geom_histogram() + theme_cowplot()*
+```{r}
+ggplot(msleep) +
+  aes(x = brainwt) +
+  geom_histogram() +
+  theme_cowplot()
+```
+
+From this box plot we can see the normality of the data. It is important that the data be distributed normally because for statistical tests you will see later many assume the data is normal.
+
+We can see here that the data is not distrusted normally, so we can try and transform the to become normally distrusted. 
+
+Try making a histogram of ____ but this time try doing a log transformation. 
+
+*Type the same command as before but this time for x type log(____)*
+```{r}
+ggplot(msleep) +
+  aes(x = log(brainwt)) +
+  geom_histogram() +
+  theme_cowplot()
+```
+
+The data was not made normal from a transformation. This happens sometimes it is okay. Just make a note when doing a statistical test that the data was not distributed normally.
+
+If you had a more specific hypothesis and wanted to look at a more specific range within the variable you could do that. Maybe you wanted to only look at the brain weights were the body weight was below 100.
+
+*new name <- filter(msleep, (bodywt <= 100))*
+*ggplot(new name) + aes(x = brainwt) + geom_histogram() + theme_cowplot()*
+```{r}
+bodywt.large <- filter(msleep, (bodywt <= 100))
+
+ggplot(bodywt.large) +
+  aes(x = brainwt) +
+  geom_histogram() +
+  theme_cowplot()
+```
+
+If you needed, you could do multiple data filters for different variable at the same time. Just make sure to give the filtered data good name. Sometimes you can end up with a lot of different names, so stay organized. Also you never want to name something the same as the name of the data set because R will overwrite the data with your filtered data. 
+
+When you explore the data enough you can move onto truly visualizing it. 
 
 #Data visulization 
 
