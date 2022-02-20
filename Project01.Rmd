@@ -203,7 +203,7 @@ We'll at the distribution of some of the key variables we're looking at, such as
 Let's first start with the histogram you already saw in the previous section exploring the distribution of body weight. 
 ```{r histogram for body weight}
 ggplot(msleep) +
-  aes(x=bodywt)+
+  aes(x=bodywt) +
   geom_histogram()
 ```
 Let's break this down a bit.
@@ -222,10 +222,10 @@ The function ggplot is very diverse and can be used to create many,many plots, b
 
 
 But we can add some additonal features/change some features of our graph. 
-Let's redo this same histogram, but this time 1) clean up the histogram, 2) clean it up the background, and 3)change the axes labels. 
+Let's redo this same histogram, but this time 1) clean up the histogram, 2) clean it up the background, and 3)change the axes labels, and 4) transformed the data to log
 ```{r improved histogram for body weight}
 ggplot(msleep) +
-  aes(x=bodywt)+
+  aes(x=log(bodywt))+
   geom_histogram(bins=50, color="black",fill="grey")+
   labs(x="Body Mass (kg)",y="Number of Individuals")+
   theme_cowplot()
@@ -240,44 +240,23 @@ Here, three things were changed: the outline of the bars, the color of the bars,
 The grey and white grid mas removed and axis lines were added. This is all courtesy of the command `theme_cowplot()` which applies all these changes in one command. 
 
 3) Changing the Axes Names 
-A new section `labs()` was added. This stands for labels, and you can change the label names of anything you specify. So to change the x axis label, you would use `x="New Name"`. The same logic would apply to the y axis label. Here, you will need to specificy the name is quotation marks. 
+A new section `labs()` was added. This stands for labels, and you can change the label names of anything you specify. So to change the x axis label, you would use `x="New Name"`. The same logic would apply to the y axis label. Here, you will need to specify the name is quotation marks. 
+
+4) Log transforming the Data 
+As we noted in the last section, the distribution of body weight isn't normal. One way to remedy this is to tell R to use the log of body weight when creating the graph. 
+Instead of just calling `x=bodywt`, add log() before the quantity you want to log. So `x=log(bodywt)`
 
 So the general format for 
 `ggplot(Dataframe) + aes(x=xvariable,y=yvariable)+ geom_histogram(bins=#, color="color",fill="color") + labs(x="X Label",y="Y Label")+ theme_cowplot()` 
 
-You can also look at the log transformed data of body weight, since we know that body weight is not noramlly distributed
-```{r improved histogram for body weight}
-ggplot(msleep) +
-  aes(x=log(bodywt))+
-  geom_histogram(bins=40, color="black",fill="grey")+
-  labs(x="Log Body Mass (kg)",y="Number of Individuals")+
-  theme_cowplot()
-```
 
-Create a histogram for the variable brainwt The base code is provided, but you'll have to add the specifics. Keep in mind that you may also have to transform the variable. 
-```{r your graph for histogram for brainwt}
+
+Create a histogram showing the distribution for the total amount of REM sleep.  The base code is provided, but you'll have to add the specifics. Keep in mind that you may also have to transform the variable. 
+```{r your histogram for rem sleep}
 ggplot() +
   aes()+
   geom_histogram()
 ```
-*Histograms of Categorical Variables*
-You can also use histograms for categorical variables, such as the variable vore (which states which "vore" an animal is).
-
-The code for this is very similiar as for quantitative variables, but there are some key changes.
-```{r transformed histogram for body weight}
-ggplot(msleep) +
-  aes(x=vore)+
-  geom_bar (color="black",fill="grey")+
-  labs(x="Type of Feeder",y="Number of Individuals")+
-  scale_x_discrete(labels = c('Carnivore','Herbivore','Insectivore',"Omnivore","NA"))+
-  theme_cowplot()
-```
-The most important change to note the change of geom_histogram to geom_bar.
-Histograms are used to show continuous, quantitative data wheres bar graphs are used to show the counts ( which is perfect for categorical variables.)
-
-An explanation to change the factors names on the graph: 
-`scale_x_discrete(labels = c('Carnivore','Herbivore','Insectivore',"Omnivore","NA"))` was used to change the names. The `c()` is the concatenate function, which is used to combine a list of things. 
-You must list out the new names you want in the order that you want it in. R will take that list of names and replace it exactly as you have it listed. So the list name will go to the first graph bar in the graph, the second name to the third name, and so on and so forth. Make sure that you the number of names you have matches the number of things you want to change. 
 
 *Looking at more than one variable*
 
@@ -291,79 +270,52 @@ ggplot(msleep) +
   labs(x="Log Body Mass (kg)",y="Total Sleep (hrs)")+
   theme_cowplot()
 ```
-To use a scatterplot, use `geom_point`, which plots points on the graph. The additonal code `geom_smooth` will add a regression line on the point as well as a 95% confidence interval. 
 
-*Categorical vs. quantitative variable* 
-To look at the distribution of a quantitative variable for the different levels of a categorical variables, use a box plot. 
-```{r boxplot of vore and sleep_total}
-ggplot(msleep) +
-  aes(x=vore,y=sleep_total)+
-  geom_boxplot()+
-  labs(x="Type of Feeder",y="Total Sleep (hrs)")+
-  scale_x_discrete(labels = c('Carnivore','Herbivore','Insectivore',"Omnivore","NA"))+
-  theme_cowplot()
-```
-The basic commands for ggplot remain largely unchanged, expect now you have to call `geom_boxplot` instead of `geom_histogram`. 
-Also, because you are looking at more than one variable, you must specify a x and y variable. 
+As you can see, the same basic elements of ggplot are still used: calling ggplot(), aes(), and some geom function. Now, though we're creating a scatterplot instead of a histogram so the exact geom function has changed from geom_histogram() to geom_point(). 
 
-*Filtering using Dplyr to Isolate Variable* 
-But what if you only want to look at a couple of factors within a categorical variables. Like for example, you want to look at whether the body mass of carnivores differs significantly from that of herbivores. 
+To use a scatter plot, use `geom_point`, which plots points on the graph. The additional code `geom_smooth` will add a regression line on the point as well as a 95% confidence interval. 
 
-One way to do this is create a create a new data frame which only those factor you want to look at. To do this, we can use the dplyr package (which is included in the tidyverse package) and specifically the filter function. 
 
-First, we'll start with some practice isolating factors.
-
-```{r isolating factors}
-dplyr::filter(msleep, vore =="carni" )
-```
-Here we use the filter command in dplyr to isolate only the animals that are carnivores. We bust specify the data frame we're looking at as well as the logical argument.
-
-Here are some common logical statments
-      Symbol          Meaning 
-        <             is less than 
-        <==           is less than or equal to
-        >             is greater than 
-        >==           is greater than or equal to
-        ==            is equal to 
-        !=            is not equal to
-        |             or 
-        &             and
-
-Try isolating only the herbivores.
-```{r isolating herbivores}
+Create a scatter plot that plots the total body weight to the amount of REM sleep. 
+```{r your scatterplot for REM sleep and body weight}
+ggplot()+
+  aes()+
+  geom_point()
 ```
 
+*Creating a New Variable* 
+Since we're looking looking at both the total hours of sleep and the amount of REM sleep, we should look at the relationship between the ratio REM/sleep total and body weight. 
 
-But how does this help us create a boxplot of only the herbivores and the carnivores?
+Looking at the variable in the data frame, however, we see that there is not a variable for the ratio of REM sleep to total sleep. So we should will need to create a new variable for this. 
 
-Let's create a new dataframe with only those animals. 
-```{r creating a new dataframe for carnivore and herbivores}
-CarniHerbi <- dplyr::filter(msleep, vore =="carni" | vore =="herbi")
+Creating a new variable involves the an arrow symbol `<-` or `->`.
+The arrow should point to the new variable and start at what that new variable will contain. You can call your new variable anything, but it's best to keep your name short, relevant to what it holds, and avoid spaces within. 
+Format for creation of new variable: NewNameofVariable <- value
+
+Create a new variable that holds the value of 17/1.8, and then call your new variable
+```{r practice creating a new variable}
+```
+Like your new variable can hold numerical values, you can also use variable names instead of numbers.
+
+This creates a new variable, but we specifically want a new variable in our msleep data, using the information of REM and sleep total. How will we do this? 
+
+We can use the $ to call a specific variable in a data frame. 
+So `NameofDataFrame$NameofVariable` allows you to isolate that variable from a dataframe. 
+To practice, call the variable sleep_rem in the msleep dataset
+```{r call the variable }
 ```
 
-There's a lot to break down here. 
-Firstly, we are creating a new data frame called CarniHeri. This is specificed by the arrow sign, which points to the the name of the new data frame but starts at what that that dataframe will contain. 
+Now, if we were to call a variable that doesn't currently exist, R would create a new variable in the specified data set. 
+So, for example, `msleep$NewVariable` would create a new column in the msleep dataset. 
 
-To create this new dataframe, R will use the dataframe msleep.
-In this dataframe CarniHerbi, there only contain animals who are carnivore or herbivores. The `|` is a logical statement which means "or". 
-
-
-Now let us create a boxplot of the body mass of only carnivores and herbivores.
-```{r boxplot of select vore and body mass}
-ggplot(CarniHerbi) +
-  aes(x=vore,y=log(bodywt))+
-  geom_boxplot()+
-  labs(x="Type of Feeder",y="Body Mass (kg)")+
-    scale_x_discrete(labels = c('Carnivore','Herbivore'))+
-  theme_cowplot()
+So combining all of this, we can create a new variable in the data frame that holds the ratio of REM and sleep_total.
+```{r creation of REM/sleep_total}
+msleep$RemSleep <- msleep$sleep_rem/msleep$sleep_total
+msleep$RemSleep
 ```
 
-Let's have you try creating a boxplot of the total sleep of only insectivores and omnivores. 
-
-```{r creating a new dataframe for omnivores and insectivores}
-```
-
-```{r your boxplot of select vore and body mass}
+Now use this new variable in the dataset to graph the relationship between rem sleep/total sleep and bodyweight 
+```{r graph for rem/sleep and bodyweight}
 ```
 
 #Hypothesis Testing 
