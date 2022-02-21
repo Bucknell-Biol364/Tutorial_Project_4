@@ -337,6 +337,16 @@ shapiro.test(logbodywt)
 ```
 As you can see, the log transformation was able to make the data more normal. The Q-Q plot shows a more linear graph than it did previously. Also, the p-value with the log transformation is now 0.1048 which is above the 0.05 cutoff, meaning that the data is normal. 
 
+*trying this idea with a different transformation*
+If the log transformation didn't work to make the data more normal, you could try to use the square root transformation or the reciprocal root transformation. 
+
+For this example, let's use the square root transformation. You will want to name the new vector "sqrtbodywt" and instead of using the "log" transformation you will use "sqrt". Then you will use the new vector in the simple.eda and the shapiro.test.
+
+```{r Fixing data -sqrt}
+
+```
+If you have done this correctly your Q-Q plot will not look linear like it did with a log transformation. Also, the p-value is now 1.383e-15, which is under the cutoff for 0.05 meaning that the data is not normal. This means that the sqrt function did not make your data normal so you will not want to use this transformation going forward. 
+
 An important note to remember going forward is that you should continue to you the vector "logbodywt" because this uses the transformed data that is now normal rather than old data that was not normal. 
 
 Now, you are going to test your data with a t-test, which is used to statistically tell if there is a difference in means between two different groups. If you have taken a statistics class, you have likely learned about how to do a t-test, but this will do it manually for you. 
