@@ -162,12 +162,12 @@ A hypothesis to test for this data is, total sleep depends on body weight.
 
 For the hypothesis we are looking at body weight so we can look at a box plot of the data. Type the command below.
 
-*ggplot(msleep) + aes(x = bodywt) + geom_histogram() + theme_cowplot()*
+*qqnorm(msleep$bodywt, main='Normal Q-Q Plot for Body Weight') qqline(msleep$bodywt)*
 ```{r normality}
 
 ```
 
-From this box plot we can see the normality of the data. It is important that the data be distributed normally because for statistical tests you will see later many assume the data is normal.
+From this QQ-plot we can see the normality of the data. It is important that the data be distributed normally because for statistical tests you will see later many assume the data is normal.
 
 We can see here that the data is not distrusted normally, so we can try and transform the to become normally distrusted. 
 
