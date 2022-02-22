@@ -385,7 +385,7 @@ After running the linear model test, the p number is 0.01122 which is smaller th
 # Acknowledgements
 
 Team Members: 
-Sam Whittaker- Data Exploration Section 
+Sam Whittaker- Data Exploration Section and README file 
 Abby Gearhart - Hypothesis testing
 Irene Hu - Introduction to R and Data Visualization
 
