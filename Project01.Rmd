@@ -319,40 +319,55 @@ Now use this new variable in the dataset to graph the relationship between rem s
 ```
 
 #Hypothesis Testing 
-Now that we have looked and explored the data above, you are going to want to check to see if the data is normal. To do this, we will be using a Shapiro-Wilk normality test. First you are going to want to create different plots of the data to look at it individually. The normal Q-Q plot should look linear.  Then we will create the Shapiro test and once you have used this command, you will look at the p-value output. If the p-value is above 0.05 it is normal, and if it is below 0.05 then the data is not normal. 
+Now that we have looked and explored the data above, you are going to want to check to see if the data is normal. To do this, we will be using a Shapiro-Wilk normality test. First you are going to want to create different plots of the data to look at it individually. The normal Q-Q plot should look linear if the data is normal.  Then we will create the Shapiro test and once you have used this command, you will look at the p-value output. If the p-value is above 0.05 it is normal, and if it is below 0.05 then the data is not normal. 
 
-```{r Data Exploration}
+You will want to look at each different variable separately and then you can compare the variables together. 
+First example is of body weight. You can run a "simple.eda" and a "Shapiro.test" on this variable to determine if it is normal or not.
+Earlier, you you created a new variable called "msleep$RemSleep". This compares rem sleep and sleep total. Running a "simple.eda" and a "Shapiro.test" will help to determine if this data related to each other is normal. 
+```{r Data Exploration for normality}
 #Testing body weight
 simple.eda(msleep$bodywt)
 shapiro.test(msleep$bodywt)
+
+simple.eda(msleep$RemSleep)
+shapiro.test(msleep$RemSleep)
 ```
-In this Shapiro-Wilk example, the data is not normal since the p-value of 2.2e-16 is below the 0.05 cutoff. Also, the graph of the Q-Qplot is not linear showing another example that the data is not normal. 
+In this Shapiro-Wilk example for body weight, the data is not normal since the p-value of 2.2e-16 is below the 0.05 cutoff. Also, the graph of the Q-Q plot is not linear showing another example that the data is not normal. 
 
-To fix this, you can try to use a log on the data to try to make this more linear. To do this you can create a new vector associated with log of the body weight. Then use the new vector in the same tests as you ran above. 
+For the new behavioral that you created 'msleep$RemSleep', the data is normal because the p-value is 0.01765 which is below 0.05. Even though the Q-Q plot looks sort of linear, the p-value is showing that the data is not normal. This shows that you shouldn't just got off of how the graph looks, but what the analysis of the data shows. 
 
+To fix this, you can try to use a log on the data to try to make this more linear and have a p-value above 0.05.  
+To do this you can create a new vector associated with log of the body weight. Then use the new vector in the same tests as you ran above.
+You can do the same thing for the new variable that you created. 
 ```{r Fixing Data Exploration}
 logbodywt <- log(msleep$bodywt)
 simple.eda(logbodywt)
 shapiro.test(logbodywt)
+
+logmsleepRemsleep <- log(msleep$RemSleep)
+simple.eda(logmsleepRemsleep)
+shapiro.test(logmsleepRemsleep)
 ```
-As you can see, the log transformation was able to make the data more normal. The Q-Q plot shows a more linear graph than it did previously. Also, the p-value with the log transformation is now 0.1048 which is above the 0.05 cutoff, meaning that the data is normal. 
+As you can see, the log transformation was able to make the data more normal for body weight. The Q-Q plot shows a more linear graph than it did previously. Also, the p-value with the log transformation is now 0.1048 which is above the 0.05 cutoff, meaning that the data is normal. 
+
+Also, the new varaible that you created now also is normal because it has a p-value of 0.08007 which is above 0.05. The Q-Q plot still looks linear like it did previously, but based on the p-value, the data is now considered normal. 
 
 *trying this idea with a different transformation*
 If the log transformation didn't work to make the data more normal, you could try to use the square root transformation or the reciprocal root transformation. 
 
-For this example, let's use the square root transformation. You will want to name the new vector "sqrtbodywt" and instead of using the "log" transformation you will use "sqrt". Then you will use the new vector in the simple.eda and the shapiro.test.
-
+For this example, let's use the square root transformation on body weight. You will want to name the new vector "sqrtbodywt". Instead of using the "log" transformation you will use "sqrt". Then you will use the new vector in the simple.eda and the shapiro.test.
 ```{r Fixing data -sqrt}
 
 ```
 If you have done this correctly your Q-Q plot will not look linear like it did with a log transformation. Also, the p-value is now 1.383e-15, which is under the cutoff for 0.05 meaning that the data is not normal. This means that the sqrt function did not make your data normal so you will not want to use this transformation going forward. 
 
-An important note to remember going forward is that you should continue to you the vector "logbodywt" because this uses the transformed data that is now normal rather than old data that was not normal. 
+An important note to remember going forward is that you should continue to you the vector "logbodywt" and "logmsleepRemsleep" because this uses the transformed data that is now normal rather than old data that was not normal. 
 
-Now, you are going to test your data with a t-test, which is used to statistically tell if there is a difference in means between two different groups. If you have taken a statistics class, you have likely learned about how to do a t-test, but this will do it manually for you. 
+In case you have one quantitative variables and one categorical variables, you will want to use a t-test on the data to interpret if there is a significant relationship between your two groups. A t-test is used to statistically tell if there is a difference in means between two different groups. If you have taken a statistics class, you have likely learned about how to do a t-test, but this will do it manually for you. 
 
-Earlier you learned how to filter two different groups, but now you are going to filter the two groups based on the variable that you want to compare. For this example, you are comparing the the body weight of the carnivore animals compared to the body weight of the herbivore animals.
-
+To create the t-test, you will want to create two different groups separately. In this example, I created one group called "Carni" and the other group called "Herbi"
+I then used the normal data for body weight to compared the two different groups.
+The test then compares these two different data frames to tell if they are significantly different. 
 ```{r t-test}
 Carni <- logbodywt[msleep$vore == "carni"]
 Herbi <- logbodywt[msleep$vore == "herbi"]
@@ -360,7 +375,12 @@ t.test(Carni, Herbi)
 ```
 After running the t-test independent sample, the p number is 0.06855 which is larger than the 0.05 cutoff value. Since the p-value is larger than 0.05, this means that there is weak evidence that supports the alternative hypothesis, which is that there is a noticeable difference between the body weight of a carnivore compared to a herbivore. The carnivore average body weight was 2.664675 and the average body weight of the herbivore was 1.061476.
 
-*trying to format a different t-test*
+In case you have two quantitative variables, you will need to use a linear model to compare the two. To do this, you will state the your y variable (sleep_rem) needs to be depend on the x variable (logbodywt), and then call the data from the table that you are using. Then you will use the summary command to give information from the linear model. 
+```{r Linear Model}
+fit = lm(sleep_rem ~ logbodywt, data = msleep)
+summary(fit)
+```
+After running the linear model test, the p number is 0.01122 which is smaller than the 0.05 cutoff value. Since the p-value is smaller than 0.05, this means that there is strong evidence to support  that the rem sleep is depended on body weight. 
 
 # Acknowledgements
 
