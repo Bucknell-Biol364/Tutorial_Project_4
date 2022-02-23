@@ -7,31 +7,11 @@ date: 9 Feb 2022
 ---
 
 ## Target Audience
-Discuss with your group the target audience for the tutorial. 
-Examples could be one of the new core Biology classes, another 300-level course (not 364), or a research group. 
+Our target audience is Biol 202 class that is working with rats in a lab collecting data. We want to help teach these students how to use R and how to use R to help analyze their data. 
 
-```{r echo=FALSE}
+This tutorial will provide you with a step by step approach to help you utilize R studio in order to help you explore, visualize, and statistically test your data. R Studio is a program build for these kinds of task and works much better then programs like excel, especially for larger data sets. This tutorial is tailored to people with limited knowledge of R studio. Through the completion of this tutorial you should gain basic R Studio skills that could be applied to other data sets.
 
-```
-
-## Grading
-
-Each student will be expected to complete the following tasks to earn 85% of the points available for this assignment (21/25).
-
-- Identify and obtain suitable dataset
-- Use a Github repository and version control to collaborate on the project
-- Spend 4-6 hours preparing, coding, and testing tutorial
-  + Data exploration: Sam
-  + Data visualization: Irene 
-  + Hypothesis testing: Abby 
-- Present tutorial in class
-- Provide public archive suitable for sharing to students/faculty
-
-Tutorials from previous classes can be viewed at our public github site: https://github.com/Bucknell-Biol364
-
-Each group should use an *Acknowledgements* section to document the participation of each member and the collaboration within and between groups.
-
-Additional credit will be awarded for providing assistance to other groups and for the development of a tutorial that goes beyond the minimal expectations listed above.
+How to access this tutorial: First make sure you have RStudio downloaded and ready to use. Open RStudio and make sure you have the updated version. Next, open this github repo where this tutorial lives and click the green code button located at the top of the window. Click on "download zip", which will load the documents into your download folder. Then locate the files and move them to an accessible folder on your computer. Then open R Studio again and find the file using the files tab in the bottom left corner of R. Click on the file named Project01.Rmd to load the tutorial. From there just follow the instructions on the file and get ready to learn how to use R Studio .
 
 #Introducing R
 
@@ -94,6 +74,7 @@ Let's do any example of loading in some packages right now.
 Here, we're loading the package "cowplot", which is used to create neater, more uniform looking graphs. 
 ```{r Load Libraries, include=FALSE}
 if (!require("cowplot")) install.packages("cowplot"); library(cowplot)
+if (!require("UsingR")) install.packages("UsingR"); library(UsingR)
 ```
 This code looks complicated, but let's break it down. 
 `if (!require("cowplot")) install.packages("cowplot")` tells R to see see if "cowplot" is already installed in your computer. If it's not installed, then it tells R to do so. 
@@ -103,7 +84,7 @@ Next, `library(cowplot)` tells R to load cowplot on your current work space.
 
 To load different packages, type in the name of you package you want to use.
 So, here, we're loading in the package "tidyverse", which contains a whole host of useful packages used to help manipulate and visualize data 
-```{r Load Libraries, include=FALSE}
+```{r Load Libraries 2, include=FALSE}
 if (!require("tidyverse")) install.packages("tidyverse"); library(tidyverse)
 ```
 Notice how you only have to replace the name of the package. So here, the word tidyverse replaced every instance of the the word cowplot. Keep the format the same - keep the quotation marks where they already are but keep them off where they aren't needed. 
