@@ -1,7 +1,7 @@
 ---
 title: "Group Project 4"
 subtitle: "Biology 368/664 Bucknell University"
-output: html_notebook
+output: github_document
 author: "Abby, Irene, and Sam"
 date: 9 Feb 2022
 ---
