@@ -1,6 +1,0 @@
-# Tutorial_Project_Group_4 
-
-Introduction: This tutorial will provide you with a step by step approach to help you utilize R studio in order to help you explore, visualize, and statistically test your data. R Studio is a program build for these kinds of task and works much better then programs like excel, especially for larger data sets. This tutorial is tailored to people with limited knowledge of R studio. Through the completion of this tutorial you should gain basic R Studio skills that could be applied to other data sets. 
-
-How to access this tutorial: 
-First make sure you have RStudio downloaded and ready to use. Open RStudio and make sure you have the updated version. Next, open this github repo where this tutorial lives  and click the green code button located at the top of the window. Click on "download zip", which will load the documents into your download folder. Then locate the files and move them to an accessible folder on your computer. Then open R Studio again and find the file using the files tab in the bottom left corner of R. Click on the file named Project01.Rmd to load the tutorial. From there just follow the instructions on the file and get ready to learn how to use R Studio .
